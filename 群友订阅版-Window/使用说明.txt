@@ -1,0 +1,48 @@
+【WEEX 交易所跟单 Windows 使用说明】
+
+这个文件夹只给 Windows 电脑运行。
+不需要 Telegram。
+不需要登录电报。
+不需要监听群消息。
+
+
+【怎么运行】
+
+进入 WEEX交易所 文件夹。
+双击 WEEX交易所.bat。
+
+第一次运行时：
+如果电脑没有 Python，程序会自动通过 winget 安装 Python。
+安装完成后会继续启动跟单，不需要手动重启。
+
+
+【需要填写】
+
+打开 跟单.env，填写：
+
+SUB_CODE=你的注册码
+WEEX_API_KEY=你的 WEEX API Key
+WEEX_API_SECRET=你的 WEEX API Secret
+WEEX_API_PASSPHRASE=你的 WEEX API Passphrase
+WEEX_ORDER_USDT=每单保证金金额
+
+不填写 WEEX API 时，只监听信号，不会自动下单。
+
+
+【跟单规则】
+
+全部按信号执行。
+本金按 跟单.env 里的 WEEX_ORDER_USDT。
+杠杆使用 WEEX 当前允许的该币最大杠杆。
+第一止盈平 50%。
+第二止盈平剩余全部。
+第三止盈只显示，不自动下单。
+信号有止损就按信号止损。
+信号没有止损就不自动加止损。
+
+
+【安全说明】
+
+WEEX API 只保存在你自己的电脑 跟单.env 里。
+信号服务器不会收到你的 WEEX API。
+注册码只用于读取信号，不是交易所密钥。

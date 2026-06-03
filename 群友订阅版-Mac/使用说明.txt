@@ -1,0 +1,45 @@
+【WEEX 交易所跟单使用说明】
+
+这个文件夹只给群友本地运行。
+不需要 Telegram。
+不需要登录电报。
+不需要监听群消息。
+
+运行逻辑：
+打开 WEEX交易所.command 后，程序会每 15 秒请求一次信号接口。
+收到新信号后，如果 WEEX API 已填写完整，就自动按信号下单。
+如果 WEEX API 没填完整，只显示信号，不会交易。
+
+
+【需要填写】
+
+打开 跟单.env，填写：
+
+SUB_CODE=你的订阅码
+WEEX_API_KEY=你的 WEEX API Key
+WEEX_API_SECRET=你的 WEEX API Secret
+WEEX_API_PASSPHRASE=你的 WEEX API Passphrase
+WEEX_ORDER_USDT=每单保证金金额
+
+WEEX_ORDER_USDT 可以运行中修改，下次新开单会自动读取。
+程序启动后会先检查一次每个币允许的最大杠杆，并写入 跟单.env。
+之后程序每 4 小时自动更新一次最大杠杆。
+
+
+【跟单规则】
+
+全部按信号执行。
+本金按 跟单.env 里的 WEEX_ORDER_USDT。
+杠杆默认使用 WEEX 当前允许的该币最大杠杆。
+第一止盈平 50%。
+第二止盈平剩余全部。
+第三止盈只显示，不自动下单。
+信号有止损就按信号止损。
+信号没有止损就不自动加止损。
+
+
+【安全说明】
+
+WEEX API 只保存在你自己的电脑 跟单.env 里。
+信号服务器不会收到你的 WEEX API。
+订阅码只用于读取信号，不是交易所密钥。
